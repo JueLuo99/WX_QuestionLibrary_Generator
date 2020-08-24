@@ -118,23 +118,39 @@ namespace WX_QuestionLibrary_Generator
             {
                 question.getAnswers().Add(item.ToString());
             }
-            // 显示预览内容
-            textBoxPreview.Text = question.ToPerviewString();
-            
-            // 更新预览信息文本（框框下方的文本提示）
+
+            // 更新预览信息文本（框框下方的文本提示）并设定题目类型
             string questionType = "";
             if (question.getAnswers().Count == 1 && question.getChoices().Count == 2)
+            {
                 questionType = "判断题";
+                question.setType("tf");
+            }
             if (question.getAnswers().Count == 1 && question.getChoices().Count > 2)
+            {
                 questionType = "单选题";
+                question.setType("s");
+            }
             if (question.getAnswers().Count > 1 && question.getChoices().Count > 2)
+            {
                 questionType = "多选题";
+                question.setType("m");
+            }
             if (questionType != "")
                 labelPreviewInfo.Text = "本题为 " + questionType + " 题，共有 " + question.getChoices().Count + " 个选项。";
             else if (question.getAnswers().Count < 1)
-                labelPreviewInfo.Text = "题目需要至少 1 个正确答案。"; 
+            {
+                labelPreviewInfo.Text = "题目需要至少 1 个正确答案。";
+                question.setType("");
+            }
             else
+            {
                 labelPreviewInfo.Text = "题目需要多于 1 个选项。";
+                question.setType("");
+            }
+
+            // 显示预览内容
+            textBoxPreview.Text = question.ToPerviewString();
         }
 
         private void buttonAddQuestion_Click(object sender, EventArgs e)

@@ -8,13 +8,15 @@ namespace WX_QuestionLibrary_Generator
 {
     class Question
     {
-        //存题目的
+        // 题目内容
         private string question;
-        //存选项
+        // 题目类型
+        private string type;
+        // 题目选项
         private List<string> choices;
-        //存答案
+        // 题目答案
         private List<string> answers;
-        public Question(string question){
+        public Question(string question) {
             this.question = question;
             choices = new List<string>();
             answers = new List<string>();
@@ -29,6 +31,9 @@ namespace WX_QuestionLibrary_Generator
             this.question = question;
             this.choices = choices;
             this.answers = answers;
+        }
+        public void setType(string type) {
+            this.type = type;
         }
         public string getQuestion()
         {
@@ -70,14 +75,16 @@ namespace WX_QuestionLibrary_Generator
             listCheck();
             string c = string.Join(",", choices.ToArray());
             string a = string.Join(",", answers.ToArray());
-            return "{\r\n    \"question\": \"" + question + "\",\r\n    \"choices\": [" + c + "],\r\n    \"answers\":[" + a + "]\r\n}";
+            //return "{\r\n    \"question\": \"" + question + "\r\n    \"type\": \"" + type + "\",\r\n    \"choices\": [" + c + "],\r\n    \"answers\":[" + a + "]\r\n}";
+            return "{\r\n    \"question\": \"" + question + "\",\r\n    \"type\": \"" + type + "\",\r\n    \"choices\": [" + c + "],\r\n    \"answers\":[" + a + "]\r\n}";
         }
         public override string ToString()
         {
             listCheck();
             string c = string.Join(",", choices.ToArray());
             string a = string.Join(",", answers.ToArray());
-            return "{\"question\": \"" + question + "\",\"choices\": [" + c + "],\"answers\":[" + a + "]}";
+            //return "{\"question\": \"" + question + ",\"type\": \"" + type + "\",\"choices\": [" + c + "],\"answers\":[" + a + "]}";
+            return "{\"question\": \"" + question + "\",\"type\": \"" + type + "\",\"choices\": [" + c + "],\"answers\":[" + a + "]}";
         }
     }
 }
