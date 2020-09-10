@@ -172,6 +172,9 @@ namespace WX_QuestionLibrary_Generator
         private void buttonSubmit_Click(object sender, EventArgs e)
         {
             listBoxLibrary.Items.Add(question);
+            listBoxAllSelections.Items.Clear();
+            listBoxAnswer.Items.Clear();
+            textBoxQuestion.Clear();
         }
         private void importFile()
         {
